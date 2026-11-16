@@ -28,7 +28,7 @@ Local configuration and secrets stay in the ignored `config/` directory. Live ev
 
 The initial minimum and tested version is 2026.11.2. When adding another supported Home Assistant version, install and test it explicitly, update the CI matrix and test dependencies, and keep the minimum version covered. Do not use private Core patches in compatibility tests.
 
-Keep the OpenAI requirement compatible with Home Assistant's built-in OpenRouter integration. Update the runtime requirement, development environment, lockfile, and tests together.
+The runtime requirement allows OpenAI 3.26.0 or newer so Home Assistant can upgrade its shared dependency. The development lockfile pins the version actually tested. Update the tested environment and check compatibility when Home Assistant changes the client version.
 
 ## Release
 
