@@ -1,0 +1,63 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to OpenRouter",
+        "description": "Enter your OpenRouter API key. Configuration only queries the model catalog; it does not run a paid evaluation.",
+        "data": {
+          "api_key": "API key"
+        }
+      },
+      "model": {
+        "title": "Select a decision model",
+        "description": "Only models that support the Decisions API are listed. Check the model's input types on OpenRouter before choosing it.",
+        "data": {
+          "model": "Model"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "The API key was rejected.",
+      "cannot_connect": "Unable to connect to OpenRouter.",
+      "invalid_catalog": "OpenRouter returned an invalid model catalog.",
+      "no_models": "No decision models are available."
+    },
+    "abort": {
+      "already_configured": "This model is already configured with this API key.",
+      "reauth_successful": "Authentication updated.",
+      "reconfigure_successful": "Configuration updated."
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "The API key was rejected"
+    },
+    "cannot_connect": {
+      "message": "Unable to connect to OpenRouter"
+    },
+    "invalid_catalog": {
+      "message": "OpenRouter returned an invalid model catalog"
+    },
+    "model_unavailable": {
+      "message": "The selected decision model is no longer available. Reconfigure the integration"
+    },
+    "evaluation_error": {
+      "message": "Unable to evaluate the OpenRouter task"
+    },
+    "invalid_evaluation": {
+      "message": "OpenRouter returned an invalid evaluation"
+    },
+    "unexpected_evaluation_questions": {
+      "message": "Evaluation returned unexpected questions"
+    },
+    "invalid_evaluation_answer": {
+      "message": "Evaluation returned an invalid answer for question {question_id}"
+    },
+    "unsupported_attachment_type": {
+      "message": "The selected model does not support this attachment type"
+    },
+    "file_read_error": {
+      "message": "Unable to read the attachment"
+    }
+  }
+}

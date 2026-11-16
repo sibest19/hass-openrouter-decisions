@@ -1,0 +1,19 @@
+{
+  "domain": "openrouter_decisions",
+  "name": "OpenRouter Decisions",
+  "codeowners": [
+    "@sibest19"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "ai_task"
+  ],
+  "documentation": "https://github.com/sibest19/hass-openrouter-decisions",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/sibest19/hass-openrouter-decisions/issues",
+  "requirements": [
+    "openai==3.26.0"
+  ],
+  "version": "0.1.0-beta.1"
+}

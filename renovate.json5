@@ -1,0 +1,10 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "automerge": false,
+  "lockFileMaintenance": {"enabled": true},
+  "packageRules": [
+    {"matchPackageNames": ["homeassistant"], "enabled": false},
+    {"matchManagers": ["github-actions"], "groupName": "GitHub Actions"}
+  ]
+}

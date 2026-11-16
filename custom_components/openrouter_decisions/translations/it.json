@@ -1,0 +1,63 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connetti a OpenRouter",
+        "description": "Inserisci la chiave API di OpenRouter. La configurazione consulta solo il catalogo dei modelli e non esegue valutazioni a pagamento.",
+        "data": {
+          "api_key": "Chiave API"
+        }
+      },
+      "model": {
+        "title": "Seleziona un modello di valutazione",
+        "description": "Sono elencati solo i modelli compatibili con l'API Decisions. Prima di sceglierne uno, verifica su OpenRouter i tipi di input supportati.",
+        "data": {
+          "model": "Modello"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "La chiave API è stata rifiutata.",
+      "cannot_connect": "Impossibile connettersi a OpenRouter.",
+      "invalid_catalog": "OpenRouter ha restituito un catalogo dei modelli non valido.",
+      "no_models": "Non sono disponibili modelli di valutazione."
+    },
+    "abort": {
+      "already_configured": "Questo modello è già configurato con questa chiave API.",
+      "reauth_successful": "Autenticazione aggiornata.",
+      "reconfigure_successful": "Configurazione aggiornata."
+    }
+  },
+  "exceptions": {
+    "invalid_auth": {
+      "message": "La chiave API è stata rifiutata"
+    },
+    "cannot_connect": {
+      "message": "Impossibile connettersi a OpenRouter"
+    },
+    "invalid_catalog": {
+      "message": "OpenRouter ha restituito un catalogo dei modelli non valido"
+    },
+    "model_unavailable": {
+      "message": "Il modello di valutazione selezionato non è più disponibile. Riconfigura l'integrazione"
+    },
+    "evaluation_error": {
+      "message": "Impossibile eseguire la valutazione OpenRouter"
+    },
+    "invalid_evaluation": {
+      "message": "OpenRouter ha restituito una valutazione non valida"
+    },
+    "unexpected_evaluation_questions": {
+      "message": "La valutazione ha restituito domande inattese"
+    },
+    "invalid_evaluation_answer": {
+      "message": "La valutazione ha restituito una risposta non valida per la domanda {question_id}"
+    },
+    "unsupported_attachment_type": {
+      "message": "Il modello selezionato non supporta questo tipo di allegato"
+    },
+    "file_read_error": {
+      "message": "Impossibile leggere l'allegato"
+    }
+  }
+}

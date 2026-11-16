@@ -1,0 +1,52 @@
+name: Prepare release
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: Version bump
+        type: choice
+        default: auto
+        options: [auto, patch, minor, major]
+      prerelease:
+        description: Release channel
+        type: choice
+        default: beta
+        options: [beta, none]
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: astral-sh/setup-uv@v10.3.3
+      - run: uv sync --locked
+      - name: Calculate version and prepare notes
+        id: version
+        env:
+          BUMP: ${{ inputs.bump }}
+          CHANNEL: ${{ inputs.prerelease }}
+        run: uv run python scripts/prepare_release.py --bump "$BUMP" --prerelease "$CHANNEL"
+      - run: uv lock
+      - name: Open release PR and dispatch its checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          BRANCH="release/v$VERSION"
+          git switch -c "$BRANCH"
+          git config user.name github-actions
+          git config user.email github-actions@users.noreply.github.com
+          git add custom_components/openrouter_decisions/manifest.json pyproject.toml uv.lock
+          git commit -m "release: v$VERSION"
+          git push origin "$BRANCH"
+          gh pr create --draft --base main --head "$BRANCH" --title "release: v$VERSION" --body-file release_notes.md
+          # Events created with GITHUB_TOKEN do not start other workflows.
+          gh workflow run ci.yml --ref "$BRANCH"

@@ -1,0 +1,41 @@
+name: Publish release
+on:
+  pull_request:
+    types: [closed]
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    if: >-
+      github.event.pull_request.merged &&
+      github.event.pull_request.head.repo.full_name == github.repository &&
+      startsWith(github.event.pull_request.head.ref, 'release/v') &&
+      startsWith(github.event.pull_request.title, 'release: v')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+      - name: Check release metadata and publish the reviewed commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TITLE: ${{ github.event.pull_request.title }}
+          RELEASE_SHA: ${{ github.event.pull_request.merge_commit_sha }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          VERSION="${RELEASE_TITLE#release: v}"
+          VERSION="$VERSION" python3 - <<'PY'
+          import json, os, re, tomllib
+          from pathlib import Path
+          version = os.environ["VERSION"]
+          assert re.fullmatch(r"\d+\.\d+\.\d+(-beta\.\d+)?", version)
+          assert json.loads(Path("custom_components/openrouter_decisions/manifest.json").read_text())["version"] == version
+          assert tomllib.loads(Path("pyproject.toml").read_text())["project"]["version"] == version
+          PY
+          gh pr view "$PR_NUMBER" --json body --jq .body > release_notes.md
+          FLAGS=()
+          if [[ "$VERSION" == *-beta.* ]]; then FLAGS+=(--prerelease); fi
+          gh release create "v$VERSION" --target "$RELEASE_SHA" --title "v$VERSION" --notes-file release_notes.md "${FLAGS[@]}"

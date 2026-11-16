@@ -1,0 +1,10 @@
+OpenRouter Decisions for Home Assistant
+
+This project contains code adapted from Home Assistant Core, licensed under
+the Apache License, Version 2.0, including the OpenRouter decision task work
+in https://github.com/home-assistant/core/pull/186289 and result validation
+prepared in https://github.com/sibest19/homeassistant-core/tree/ai-task-result-validation.
+
+Original PR author: Joost Lekkerkerker (joostlek).
+Custom integration and follow-up work: Simone A. (sibest19).
+Release workflow structure inspired by sibest19/hass-meteoam.

@@ -1,0 +1,32 @@
+[project]
+name = "hass-openrouter-decisions"
+version = "0.1.0-beta.1"
+description = "OpenRouter decision tasks for Home Assistant"
+requires-python = ">=3.14.2"
+license = "Apache-2.0"
+
+[dependency-groups]
+test = ["pytest>=8", "pytest-asyncio>=1", "respx>=0.22"]
+dev = [
+  {include-group = "test"},
+  "homeassistant==2026.11.2",
+  "openai==3.26.0",
+  "ruff>=0.14",
+  "pre-commit>=4",
+  "gazetteer-matcher==1.1.0",
+  "hassil==3.12.1",
+  "home-assistant-intents==2026.10.27",
+]
+
+[tool.ruff]
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "ASYNC"]
+ignore = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-p no:respx"
+asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
