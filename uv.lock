@@ -1137,7 +1137,7 @@ wheels = [
 
 [[package]]
 name = "hass-openrouter-decisions"
-version = "0.1.0b2"
+version = "0.1.0b3"
 source = { virtual = "." }
 
 [package.dev-dependencies]
