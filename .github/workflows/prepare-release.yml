@@ -45,7 +45,8 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@users.noreply.github.com
           git add custom_components/openrouter_decisions/manifest.json pyproject.toml uv.lock
-          git commit -m "release: v$VERSION"
+          # The first release may already have its target version in source.
+          git commit --allow-empty -m "release: v$VERSION"
           git push origin "$BRANCH"
           gh pr create --draft --base main --head "$BRANCH" --title "release: v$VERSION" --body-file release_notes.md
           # Events created with GITHUB_TOKEN do not start other workflows.
