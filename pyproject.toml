@@ -9,7 +9,7 @@ license = "Apache-2.0"
 test = ["pytest>=8", "pytest-asyncio>=1", "respx>=0.22"]
 dev = [
   {include-group = "test"},
-  "homeassistant==2026.11.2",
+  "homeassistant==2026.11.0",
   "openai==3.26.0",
   "ruff>=0.14",
   "pre-commit>=4",

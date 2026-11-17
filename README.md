@@ -1,6 +1,6 @@
 # OpenRouter Decisions for Home Assistant
 
-A community integration for evaluating questions with OpenRouter's native Decisions API. Requires **Home Assistant 2026.11.2 or newer**.
+A community integration for evaluating questions with OpenRouter's native Decisions API. Requires **Home Assistant 2026.11.0 or newer**.
 
 This is an experimental integration: the upstream Decisions API is in alpha and may change. Evaluation requests can incur OpenRouter charges. Returned probabilities are model estimates, not guarantees.
 
@@ -15,7 +15,7 @@ It uses its own `openrouter_decisions` domain. You can keep the built-in OpenRou
 
 ## Install
 
-The repository is not in the default Marketplace catalog. On Home Assistant 2026.11.2 or newer:
+The repository is not in the default Marketplace catalog. On Home Assistant 2026.11.0 or newer:
 
 1. Open **Settings > Marketplace**.
 2. Select **Add from link** and enter `https://github.com/sibest19/hass-openrouter-decisions`.

@@ -10,7 +10,7 @@ make lint
 make test
 ```
 
-The lockfile pins Home Assistant 2026.11.2. Test dependencies include its AI Task and conversation requirements. Tests use a temporary Home Assistant configuration and mocked OpenRouter HTTP responses.
+The lockfile pins the minimum supported version, Home Assistant 2026.11.0. Test dependencies include its AI Task and conversation requirements. Tests use a temporary Home Assistant configuration and mocked OpenRouter HTTP responses.
 
 The respx plugin is loaded after Home Assistant initializes its HTTPX compatibility alias; keep the pytest configuration and conftest import order in place.
 
@@ -26,7 +26,7 @@ Local configuration and secrets stay in the ignored `config/` directory. Live ev
 
 ## Compatibility
 
-The initial minimum and tested version is 2026.11.2. When adding another supported Home Assistant version, install and test it explicitly, update the CI matrix and test dependencies, and keep the minimum version covered. Do not use private Core patches in compatibility tests.
+The minimum supported version is 2026.11.0. CI tests 2026.11.0 and 2026.11.2, installing and verifying each exact version. CI uses the environment directly after selecting a target so uv does not restore the lockfile version. When adding another supported Home Assistant version, update the CI matrix and keep the minimum covered. Do not use private Core patches in compatibility tests.
 
 The runtime requirement allows OpenAI 3.26.0 or newer so Home Assistant can upgrade its shared dependency. The development lockfile pins the version actually tested. Update the tested environment and check compatibility when Home Assistant changes the client version.
 

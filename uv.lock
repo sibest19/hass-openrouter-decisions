@@ -1166,7 +1166,7 @@ dev = [
     { name = "gazetteer-matcher", specifier = "==1.1.0" },
     { name = "hassil", specifier = "==3.12.1" },
     { name = "home-assistant-intents", specifier = "==2026.10.27" },
-    { name = "homeassistant", specifier = "==2026.11.2" },
+    { name = "homeassistant", specifier = "==2026.11.0" },
     { name = "openai", specifier = "==3.26.0" },
     { name = "pre-commit", specifier = ">=4" },
     { name = "pytest", specifier = ">=8" },
@@ -1216,7 +1216,7 @@ wheels = [
 
 [[package]]
 name = "homeassistant"
-version = "2026.11.2"
+version = "2026.11.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "aiodns" },
@@ -1270,9 +1270,9 @@ dependencies = [
     { name = "yarl" },
     { name = "zeroconf" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/9b/3e/2e1afa90e69153e06b1e0cd7786c1f4fc273a5b294ceabc076c42c44fddf/homeassistant-2026.11.2.tar.gz", hash = "sha256:3d83587c7770bc1cb071f65388e9864732809d5077e0691e37cd9ce4ca4a9ca5", size = 42553889, upload-time = "2026-11-16T20:18:44.91Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/f2/13/ab2c1e18f48341791a77520a869cdb12f1cebd3e6e292ddf2061891b0fc6/homeassistant-2026.11.0.tar.gz", hash = "sha256:5a5e6af380793d53ab37fd9ce5b7a7e00a408a7258923fe75d0610e31a394468", size = 42012362, upload-time = "2026-11-05T13:03:49.664Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/61/bf/8893f1ae3f23345be29253771e588e2ac32a1e4e220d1f6e2b899fd2b7c6/homeassistant-2026.11.2-py3-none-any.whl", hash = "sha256:7a026d4324a59b9fdb694816ad72ade4fc16a7a11a11b87b3c93c61258800cc0", size = 68795627, upload-time = "2026-11-16T20:18:36.953Z" },
+    { url = "https://files.pythonhosted.org/packages/28/0a/10c900142dfff3c8bda64e75d0077519c4ee9a3e0f18aabc67c023ac079f/homeassistant-2026.11.0-py3-none-any.whl", hash = "sha256:7ca5fbde9dea879ac7723949fc84347aac5182e6309c357b2e4973fd391b00f7", size = 67607712, upload-time = "2026-11-04T18:00:10.238Z" },
 ]
 
 [[package]]
