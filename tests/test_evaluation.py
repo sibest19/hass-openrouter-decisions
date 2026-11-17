@@ -169,16 +169,21 @@ async def test_invalid_response(hass, respx_mock, response):
         await evaluate(hass, entry)
 
 
-async def test_api_failure(hass, respx_mock):
+@pytest.mark.parametrize("status", [400, 402, 403, 404, 413, 429, 503])
+async def test_api_failure(hass, respx_mock, status):
     """Keep provider details out of translated user-facing errors."""
     respx_mock.post(DECISIONS_URL).mock(
-        return_value=httpx.Response(503, json={"error": {"message": "internal detail"}})
+        return_value=httpx.Response(
+            status, json={"error": {"message": "internal detail"}}
+        )
     )
     entry = await setup_entry(hass)
     with pytest.raises(HomeAssistantError) as exc:
         await evaluate(hass, entry)
-    assert exc.value.translation_key == "evaluation_error"
-    assert exc.value.__cause__ is not None
+    assert exc.value.translation_key == "evaluation_api_error"
+    assert exc.value.translation_placeholders == {"status": str(status)}
+    assert exc.value.__cause__.status_code == status
+    assert str(status) in str(exc.value)
     assert "internal detail" not in str(exc.value)
 
 
@@ -292,3 +297,20 @@ async def test_runtime_authentication_error(hass, respx_mock):
         flow["context"]["source"] == "reauth"
         for flow in hass.config_entries.flow.async_progress()
     )
+
+
+@pytest.mark.parametrize(
+    ("error", "key"),
+    [
+        (httpx.ConnectError, "evaluation_connection_error"),
+        (httpx.ReadTimeout, "evaluation_timeout"),
+    ],
+)
+async def test_connection_failure(hass, respx_mock, error, key):
+    """Keep network failures distinct from HTTP response errors."""
+    respx_mock.post(DECISIONS_URL).mock(side_effect=error("internal detail"))
+    entry = await setup_entry(hass)
+    with pytest.raises(HomeAssistantError) as exc:
+        await evaluate(hass, entry)
+    assert exc.value.translation_key == key
+    assert "internal detail" not in str(exc.value)

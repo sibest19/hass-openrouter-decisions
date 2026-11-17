@@ -10,7 +10,13 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 from homeassistant.helpers.json import json_dumps
-from openai import AuthenticationError, OpenAIError
+from openai import (
+    APIConnectionError,
+    APIStatusError,
+    APITimeoutError,
+    AuthenticationError,
+    OpenAIError,
+)
 
 from . import OpenRouterConfigEntry
 from .const import DECISIONS_URL, DOMAIN
@@ -98,6 +104,20 @@ class OpenRouterEvaluationEntity(ai_task.AITaskEntity):
             self.entry.async_start_reauth(self.hass)
             raise HomeAssistantError(
                 translation_domain=DOMAIN, translation_key="invalid_auth"
+            ) from err
+        except APIStatusError as err:
+            raise HomeAssistantError(
+                translation_domain=DOMAIN,
+                translation_key="evaluation_api_error",
+                translation_placeholders={"status": str(err.status_code)},
+            ) from err
+        except APITimeoutError as err:
+            raise HomeAssistantError(
+                translation_domain=DOMAIN, translation_key="evaluation_timeout"
+            ) from err
+        except APIConnectionError as err:
+            raise HomeAssistantError(
+                translation_domain=DOMAIN, translation_key="evaluation_connection_error"
             ) from err
         except OpenAIError as err:
             raise HomeAssistantError(

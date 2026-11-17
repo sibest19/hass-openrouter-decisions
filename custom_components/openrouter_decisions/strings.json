@@ -58,6 +58,15 @@
     },
     "file_read_error": {
       "message": "Unable to read the attachment"
+    },
+    "evaluation_api_error": {
+      "message": "OpenRouter evaluation failed (HTTP {status})"
+    },
+    "evaluation_timeout": {
+      "message": "The OpenRouter evaluation request timed out"
+    },
+    "evaluation_connection_error": {
+      "message": "Unable to connect to OpenRouter for evaluation"
     }
   }
 }

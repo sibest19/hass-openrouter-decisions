@@ -58,6 +58,15 @@
     },
     "file_read_error": {
       "message": "Impossibile leggere l'allegato"
+    },
+    "evaluation_api_error": {
+      "message": "Valutazione OpenRouter non riuscita (HTTP {status})"
+    },
+    "evaluation_timeout": {
+      "message": "La richiesta di valutazione OpenRouter è scaduta"
+    },
+    "evaluation_connection_error": {
+      "message": "Impossibile connettersi a OpenRouter per la valutazione"
     }
   }
 }
